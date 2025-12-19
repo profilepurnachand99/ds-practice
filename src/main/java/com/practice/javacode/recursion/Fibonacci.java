@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Fibonacci {
+    private static Map<Integer, Integer> memo = new HashMap<>();
+
     public static void main(String[] args) {
         int n = 10;
         System.out.println("Fibonacci of " + n + " = " + fibonacci(n));
@@ -31,7 +33,6 @@ public class Fibonacci {
         return curr;
     }
 
-    private static Map<Integer, Integer> memo = new HashMap<>();
     //Memoization	O(n)	O(n)	Fast, avoids recomputation
     public static int fibonacciDP(int n) {
         if (n == 0) return 0;

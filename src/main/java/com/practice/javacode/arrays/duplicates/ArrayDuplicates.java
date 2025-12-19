@@ -4,10 +4,10 @@ import java.util.*;
 
 public class ArrayDuplicates {
     /*
-    * If you’re writing production code, use the HashSet approach for clarity and speed.
-    * If you need minimal memory usage, use the sorting approach.
-    * If you want duplicate counts, use the Map approach.
-    * */
+     * If you’re writing production code, use the HashSet approach for clarity and speed.
+     * If you need minimal memory usage, use the sorting approach.
+     * If you want duplicate counts, use the Map approach.
+     * */
     public static void main(String[] args) {
     }
 

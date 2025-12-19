@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 public class GroupAnagrams {
     public static void main(String[] args) {
-        String[] words = {"eat","tea","tan","ate","nat","bat"};
+        String[] words = {"eat", "tea", "tan", "ate", "nat", "bat"};
         System.out.println(groupAnagrams_NoSorting(words));
     }
 
@@ -30,7 +30,7 @@ public class GroupAnagrams {
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < 26; i++) {
                 if (count[i] > 0) {
-                    sb.append((char)(i + 'a')).append(count[i]);
+                    sb.append((char) (i + 'a')).append(count[i]);
                 }
             }
             String key = sb.toString();

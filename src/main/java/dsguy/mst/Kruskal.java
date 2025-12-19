@@ -1,7 +1,7 @@
 package dsguy.mst;
 
-import dsguy.node.WeightedNode;
 import dsguy.graphUtil.UndirectedEdge;
+import dsguy.node.WeightedNode;
 
 import java.util.ArrayList;
 import java.util.Collections;

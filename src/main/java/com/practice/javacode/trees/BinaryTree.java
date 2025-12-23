@@ -1,15 +1,15 @@
-package com.practice.javacode.binarytree;
+package com.practice.javacode.trees;
 
 import java.util.LinkedList;
 import java.util.Queue;
 
 // Node class
-class BinaryNode {
+class BTNode {
     int value;
-    BinaryNode left;
-    BinaryNode right;
+    BTNode left;
+    BTNode right;
 
-    BinaryNode(int value) {
+    BTNode(int value) {
         this.value = value;
         this.left = null;
         this.right = null;
@@ -18,7 +18,7 @@ class BinaryNode {
 
 // Binary Tree class
 public class BinaryTree {
-    BinaryNode root;
+    BTNode root;
 
     // Level-order traversal
     public void levelOrder() {
@@ -27,11 +27,11 @@ public class BinaryTree {
             return;
         }
 
-        Queue<BinaryNode> queue = new LinkedList<>();
+        Queue<BTNode> queue = new LinkedList<>();
         queue.add(root);
 
         while (!queue.isEmpty()) {
-            BinaryNode current = queue.remove();
+            BTNode current = queue.remove();
             System.out.print(current.value + " ");
 
             if (current.left != null)
@@ -47,11 +47,11 @@ public class BinaryTree {
     public boolean search(int value) {
         if (root == null) return false;
 
-        Queue<BinaryNode> queue = new LinkedList<>();
+        Queue<BTNode> queue = new LinkedList<>();
         queue.add(root);
 
         while (!queue.isEmpty()) {
-            BinaryNode current = queue.remove();
+            BTNode current = queue.remove();
 
             if (current.value == value)
                 return true;
@@ -65,20 +65,36 @@ public class BinaryTree {
         return false;
     }
 
+    // Search a value
+    public boolean searchRecursive(int value) {
+        return searchRec(root, value);
+    }
+
+    // Recursive search in a general binary tree
+    private boolean searchRec(BTNode root, int value) {
+        // Base case: empty tree
+        if (root == null) return false;
+        // If current node matches
+        if (root.value == value) return true;
+
+        // Recursively search left and right subtrees
+        return searchRec(root.left, value) || searchRec(root.right, value);
+    }
+
     // Insert node in level order
     public void insert(int value) {
-        BinaryNode newNode = new BinaryNode(value);
+        BTNode newNode = new BTNode(value);
 
         if (root == null) {
             root = newNode;
             return;
         }
 
-        Queue<BinaryNode> queue = new LinkedList<>();
+        Queue<BTNode> queue = new LinkedList<>();
         queue.add(root);
 
         while (!queue.isEmpty()) {
-            BinaryNode current = queue.remove();
+            BTNode current = queue.remove();
 
             if (current.left == null) {
                 current.left = newNode;
@@ -96,7 +112,7 @@ public class BinaryTree {
         }
     }
 
-    // Delete a node by replacing it with deepest node
+    // Delete a node by replacing it with the deepest node
     public void delete(int value) {
         if (root == null) return;
 
@@ -106,12 +122,12 @@ public class BinaryTree {
             return;
         }
 
-        Queue<BinaryNode> queue = new LinkedList<>();
+        Queue<BTNode> queue = new LinkedList<>();
         queue.add(root);
 
-        BinaryNode target = null;
-        BinaryNode current = null;
-        BinaryNode parentOfDeepest = null;
+        BTNode target = null;
+        BTNode current = null;
+        BTNode parentOfDeepest = null;
 
         while (!queue.isEmpty()) {
             current = queue.remove();
@@ -130,6 +146,7 @@ public class BinaryTree {
             }
         }
 
+        //current will be the deepest node after level order traversal
         if (target != null) {
             target.value = current.value; // replace with deepest node value
             deleteDeepest(parentOfDeepest, current);
@@ -137,20 +154,45 @@ public class BinaryTree {
     }
 
     // Helper to delete deepest node
-    private void deleteDeepest(BinaryNode parent, BinaryNode deepest) {
-        if (parent == null) {
+    private void deleteDeepest(BTNode parentOfDeepest, BTNode deepest) {
+        if (parentOfDeepest == null) {
             root = null;
             return;
         }
 
-        if (parent.right == deepest)
-            parent.right = null;
+        if (parentOfDeepest.right == deepest)
+            parentOfDeepest.right = null;
         else
-            parent.left = null;
+            parentOfDeepest.left = null;
+    }
+
+    private void deleteDeepestFromRoot(BTNode root, BTNode deepest) {
+        Queue<BTNode> q = new LinkedList<>();
+        q.add(root);
+
+        while (!q.isEmpty()) {
+            BTNode temp = q.poll();
+
+            if (temp.left != null) {
+                if (temp.left == deepest) {
+                    temp.left = null;
+                    return;
+                }
+                q.add(temp.left);
+            }
+
+            if (temp.right != null) {
+                if (temp.right == deepest) {
+                    temp.right = null;
+                    return;
+                }
+                q.add(temp.right);
+            }
+        }
     }
 
     // Inorder Traversal (Left, Root, Right)
-    public void inorder(BinaryNode node) {
+    public void inorder(BTNode node) {
         if (node == null) return;
 
         inorder(node.left);
@@ -159,7 +201,7 @@ public class BinaryTree {
     }
 
     // Preorder Traversal (Root, Left, Right)
-    public void preorder(BinaryNode node) {
+    public void preorder(BTNode node) {
         if (node == null) return;
 
         System.out.print(node.value + " ");
@@ -168,7 +210,7 @@ public class BinaryTree {
     }
 
     // Postorder Traversal (Left, Right, Root)
-    public void postorder(BinaryNode node) {
+    public void postorder(BTNode node) {
         if (node == null) return;
 
         postorder(node.left);
@@ -185,10 +227,13 @@ public class BinaryTree {
         tree.insert(5);
         tree.levelOrder(); // 1 2 3 4 5
 
-        System.out.print("Inorder: "); tree.inorder(tree.root); // 4 2 5 1 3
-        System.out.print("\nPreorder: "); tree.preorder(tree.root); // 1 2 4 5 3
-        System.out.print("\nPostorder: "); tree.postorder(tree.root); // 4 5 2 3 1
-        System.out.println("");
+        System.out.print("Inorder: ");
+        tree.inorder(tree.root); // 4 2 5 1 3
+        System.out.print("\nPreorder: ");
+        tree.preorder(tree.root); // 1 2 4 5 3
+        System.out.print("\nPostorder: ");
+        tree.postorder(tree.root); // 4 5 2 3 1
+        System.out.println();
 
         System.out.println(tree.search(3)); // true
         tree.delete(2);

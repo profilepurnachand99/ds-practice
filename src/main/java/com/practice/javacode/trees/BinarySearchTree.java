@@ -13,6 +13,21 @@ class BSTNode {
 public class BinarySearchTree {
     BSTNode root;
 
+    // Search a value
+    public boolean search(int value) {
+        return searchRec(root, value);
+    }
+
+    private boolean searchRec(BSTNode node, int value) {
+        if (node == null) return false;
+        if (node.value == value) return true;
+
+        if (value < node.value)
+            return searchRec(node.left, value);
+        else
+            return searchRec(node.right, value);
+    }
+
     // Insert a value
     public void insert(int value) {
         root = insertRec(root, value);
@@ -29,21 +44,6 @@ public class BinarySearchTree {
             node.right = insertRec(node.right, value);
 
         return node;
-    }
-
-    // Search a value
-    public boolean search(int value) {
-        return searchRec(root, value);
-    }
-
-    private boolean searchRec(BSTNode node, int value) {
-        if (node == null) return false;
-        if (node.value == value) return true;
-
-        if (value < node.value)
-            return searchRec(node.left, value);
-        else
-            return searchRec(node.right, value);
     }
 
     // Delete a value
@@ -70,6 +70,7 @@ public class BinarySearchTree {
                 return node.left;
 
             // Case 3: two children
+            // Find the successor of node to be deleted. Successor of a node is the least element in the right subtree
             BSTNode successor = minValueNode(node.right);
             node.value = successor.value;
             node.right = deleteRec(node.right, successor.value);

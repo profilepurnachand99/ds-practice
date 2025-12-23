@@ -1,4 +1,4 @@
-package com.practice.javacode.binarytree;
+package com.practice.javacode.trees;
 
 public class BinaryTreeArray {
     int[] arr;

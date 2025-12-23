@@ -3,19 +3,6 @@ package com.practice.javacode.trees;
 import java.util.LinkedList;
 import java.util.Queue;
 
-// Node class
-class BTNode {
-    int value;
-    BTNode left;
-    BTNode right;
-
-    BTNode(int value) {
-        this.value = value;
-        this.left = null;
-        this.right = null;
-    }
-}
-
 // Binary Tree class
 public class BinaryTree {
     BTNode root;
@@ -240,4 +227,3 @@ public class BinaryTree {
         tree.levelOrder(); // 1 5 3 4
     }
 }
-

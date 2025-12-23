@@ -1,24 +1,14 @@
 package com.practice.javacode.trees;
 
-class BSTNode {
-    int value;
-    BSTNode left;
-    BSTNode right;
-
-    BSTNode(int value) {
-        this.value = value;
-    }
-}
-
 public class BinarySearchTree {
-    BSTNode root;
+    BTNode root;
 
     // Search a value
     public boolean search(int value) {
         return searchRec(root, value);
     }
 
-    private boolean searchRec(BSTNode node, int value) {
+    private boolean searchRec(BTNode node, int value) {
         if (node == null) return false;
         if (node.value == value) return true;
 
@@ -33,9 +23,9 @@ public class BinarySearchTree {
         root = insertRec(root, value);
     }
 
-    private BSTNode insertRec(BSTNode node, int value) {
+    private BTNode insertRec(BTNode node, int value) {
         if (node == null) {
-            return new BSTNode(value);
+            return new BTNode(value);
         }
 
         if (value < node.value)
@@ -51,7 +41,7 @@ public class BinarySearchTree {
         root = deleteRec(root, value);
     }
 
-    private BSTNode deleteRec(BSTNode node, int value) {
+    private BTNode deleteRec(BTNode node, int value) {
         if (node == null) return null;
 
         if (value < node.value) {
@@ -71,36 +61,36 @@ public class BinarySearchTree {
 
             // Case 3: two children
             // Find the successor of node to be deleted. Successor of a node is the least element in the right subtree
-            BSTNode successor = minValueNode(node.right);
+            BTNode successor = minValueNode(node.right);
             node.value = successor.value;
             node.right = deleteRec(node.right, successor.value);
         }
         return node;
     }
 
-    private BSTNode minValueNode(BSTNode node) {
-        BSTNode current = node;
+    private BTNode minValueNode(BTNode node) {
+        BTNode current = node;
         while (current.left != null)
             current = current.left;
         return current;
     }
 
     // Traversals
-    public void inorder(BSTNode node) {
+    public void inorder(BTNode node) {
         if (node == null) return;
         inorder(node.left);
         System.out.print(node.value + " ");
         inorder(node.right);
     }
 
-    public void preorder(BSTNode node) {
+    public void preorder(BTNode node) {
         if (node == null) return;
         System.out.print(node.value + " ");
         preorder(node.left);
         preorder(node.right);
     }
 
-    public void postorder(BSTNode node) {
+    public void postorder(BTNode node) {
         if (node == null) return;
         postorder(node.left);
         postorder(node.right);

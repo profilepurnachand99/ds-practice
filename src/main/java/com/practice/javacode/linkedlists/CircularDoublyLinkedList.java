@@ -1,15 +1,27 @@
 package com.practice.javacode.linkedlists;
 
 public class CircularDoublyLinkedList {
-    private DoublyNode head;
+    private Node head;
 
     public CircularDoublyLinkedList() {
         head = null;
     }
 
+    public static void main(String[] args) {
+        CircularDoublyLinkedList list = new CircularDoublyLinkedList();
+        list.insertAtHead(10);
+        list.insertAtTail(20);
+        list.insertAtTail(30);
+        list.insertAtHead(5);
+        list.printForward(); // 5 <-> 10 <-> 20 <-> 30 <-> (back to head)
+        list.printBackward(); // 30 <-> 20 <-> 10 <-> 5 <-> (back to tail)
+        list.deleteValue(20);
+        list.printForward(); // 5 <-> 10 <-> 30 <-> (back to head)
+    }
+
     // Insert at head
     public void insertAtHead(int data) {
-        DoublyNode newNode = new DoublyNode(data);
+        Node newNode = new Node(data);
 
         if (head == null) {
             head = newNode;
@@ -18,7 +30,7 @@ public class CircularDoublyLinkedList {
             return;
         }
 
-        DoublyNode tail = head.prev;
+        Node tail = head.prev;
 
         newNode.next = head;
         newNode.prev = tail;
@@ -36,8 +48,8 @@ public class CircularDoublyLinkedList {
             return;
         }
 
-        DoublyNode newNode = new DoublyNode(data);
-        DoublyNode tail = head.prev;
+        Node newNode = new Node(data);
+        Node tail = head.prev;
 
         newNode.next = head;
         newNode.prev = tail;
@@ -50,7 +62,7 @@ public class CircularDoublyLinkedList {
     public void deleteValue(int value) {
         if (head == null) return;
 
-        DoublyNode current = head;
+        Node current = head;
 
         do {
             if (current.data == value) {
@@ -61,8 +73,8 @@ public class CircularDoublyLinkedList {
                     return;
                 }
 
-                DoublyNode prevNode = current.prev;
-                DoublyNode nextNode = current.next;
+                Node prevNode = current.prev;
+                Node nextNode = current.next;
 
                 prevNode.next = nextNode;
                 nextNode.prev = prevNode;
@@ -85,7 +97,7 @@ public class CircularDoublyLinkedList {
             return;
         }
 
-        DoublyNode temp = head;
+        Node temp = head;
         do {
             System.out.print(temp.data + " <-> ");
             temp = temp.next;
@@ -101,8 +113,8 @@ public class CircularDoublyLinkedList {
             return;
         }
 
-        DoublyNode tail = head.prev;
-        DoublyNode temp = tail;
+        Node tail = head.prev;
+        Node temp = tail;
 
         do {
             System.out.print(temp.data + " <-> ");
@@ -110,17 +122,5 @@ public class CircularDoublyLinkedList {
         } while (temp != tail);
 
         System.out.println("(back to tail)");
-    }
-
-    public static void main(String[] args) {
-        CircularDoublyLinkedList list = new CircularDoublyLinkedList();
-        list.insertAtHead(10);
-        list.insertAtTail(20);
-        list.insertAtTail(30);
-        list.insertAtHead(5);
-        list.printForward(); // 5 <-> 10 <-> 20 <-> 30 <-> (back to head)
-        list.printBackward(); // 30 <-> 20 <-> 10 <-> 5 <-> (back to tail)
-        list.deleteValue(20);
-        list.printForward(); // 5 <-> 10 <-> 30 <-> (back to head)
     }
 }

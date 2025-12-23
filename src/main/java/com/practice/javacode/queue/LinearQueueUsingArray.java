@@ -13,6 +13,16 @@ public class LinearQueueUsingArray {
         rear = -1;
     }
 
+    public static void main(String[] args) {
+        LinearQueueUsingArray q = new LinearQueueUsingArray(5);
+        q.enqueue(10);
+        q.enqueue(20);
+        q.enqueue(30);
+        System.out.println(q.peek()); // 10
+        System.out.println(q.dequeue()); // 10
+        System.out.println(q.peek()); // 20
+    }
+
     // Add element to queue
     public void enqueue(int x) {
         if (isFull()) {
@@ -46,15 +56,5 @@ public class LinearQueueUsingArray {
 
     public boolean isFull() {
         return rear == capacity - 1;
-    }
-
-    public static void main(String[] args) {
-        LinearQueueUsingArray q = new LinearQueueUsingArray(5);
-        q.enqueue(10);
-        q.enqueue(20);
-        q.enqueue(30);
-        System.out.println(q.peek()); // 10
-        System.out.println(q.dequeue()); // 10
-        System.out.println(q.peek()); // 20
     }
 }

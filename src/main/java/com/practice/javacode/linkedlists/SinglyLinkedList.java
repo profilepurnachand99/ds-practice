@@ -3,6 +3,19 @@ package com.practice.javacode.linkedlists;
 public class SinglyLinkedList {
     private Node head;
 
+    public static void main(String[] args) {
+        SinglyLinkedList list = new SinglyLinkedList();
+        list.insertAtHead(10);
+        list.insertAtEnd(20);
+        list.insertAtEnd(30);
+        list.insertAtPosition(15, 1);
+        list.printList(); // 10 -> 15 -> 20 -> 30 -> null
+        list.deleteValue(20);
+        list.printList(); // 10 -> 15 -> 30 -> null
+        System.out.println(list.search(30)); // true
+        System.out.println(list.search(50)); // false
+    }
+
     // Insert at beginning
     public void insertAtHead(int data) {
         Node newNode = new Node(data);
@@ -111,18 +124,5 @@ public class SinglyLinkedList {
             temp = temp.next;
         }
         System.out.println("null");
-    }
-
-    public static void main(String[] args) {
-        SinglyLinkedList list = new SinglyLinkedList();
-        list.insertAtHead(10);
-        list.insertAtEnd(20);
-        list.insertAtEnd(30);
-        list.insertAtPosition(15, 1);
-        list.printList(); // 10 -> 15 -> 20 -> 30 -> null
-        list.deleteValue(20);
-        list.printList(); // 10 -> 15 -> 30 -> null
-        System.out.println(list.search(30)); // true
-        System.out.println(list.search(50)); // false
     }
 }

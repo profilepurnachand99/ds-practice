@@ -1,17 +1,29 @@
 package com.practice.javacode.linkedlists;
 
 class DoublyLinkedList {
-    private DoublyNode head;
-    private DoublyNode tail;
+    private Node head;
+    private Node tail;
 
     public DoublyLinkedList() {
         head = null;
         tail = null;
     }
 
+    public static void main(String[] args) {
+        DoublyLinkedList list = new DoublyLinkedList();
+        list.insertAtHead(10);
+        list.insertAtTail(20);
+        list.insertAtTail(30);
+        list.insertAtPosition(15, 1);
+        list.printForward(); // 10 <-> 15 <-> 20 <-> 30 <-> null
+        list.printBackward(); // 30 <-> 20 <-> 15 <-> 10 <-> null
+        list.deleteValue(20);
+        list.printForward(); // 10 <-> 15 <-> 30 <-> null
+    }
+
     // Insert at head
     public void insertAtHead(int data) {
-        DoublyNode newNode = new DoublyNode(data);
+        Node newNode = new Node(data);
 
         if (head == null) {
             head = tail = newNode;
@@ -25,7 +37,7 @@ class DoublyLinkedList {
 
     // Insert at tail
     public void insertAtTail(int data) {
-        DoublyNode newNode = new DoublyNode(data);
+        Node newNode = new Node(data);
 
         if (tail == null) {
             head = tail = newNode;
@@ -44,7 +56,7 @@ class DoublyLinkedList {
             return;
         }
 
-        DoublyNode temp = head;
+        Node temp = head;
         for (int i = 0; i < position - 1 && temp != null; i++) {
             temp = temp.next;
         }
@@ -54,7 +66,7 @@ class DoublyLinkedList {
             return;
         }
 
-        DoublyNode newNode = new DoublyNode(data);
+        Node newNode = new Node(data);
         newNode.next = temp.next;
         newNode.prev = temp;
         temp.next.prev = newNode;
@@ -63,7 +75,7 @@ class DoublyLinkedList {
 
     // Delete first occurrence of a value
     public void deleteValue(int value) {
-        DoublyNode temp = head;
+        Node temp = head;
 
         while (temp != null && temp.data != value) {
             temp = temp.next;
@@ -102,7 +114,7 @@ class DoublyLinkedList {
             return;
         }
 
-        DoublyNode temp = head;
+        Node temp = head;
         for (int i = 0; i < position && temp != null; i++) {
             temp = temp.next;
         }
@@ -121,7 +133,7 @@ class DoublyLinkedList {
 
     // Print forward
     public void printForward() {
-        DoublyNode temp = head;
+        Node temp = head;
         while (temp != null) {
             System.out.print(temp.data + " <-> ");
             temp = temp.next;
@@ -131,23 +143,11 @@ class DoublyLinkedList {
 
     // Print backward
     public void printBackward() {
-        DoublyNode temp = tail;
+        Node temp = tail;
         while (temp != null) {
             System.out.print(temp.data + " <-> ");
             temp = temp.prev;
         }
         System.out.println("null");
-    }
-
-    public static void main(String[] args) {
-        DoublyLinkedList list = new DoublyLinkedList();
-        list.insertAtHead(10);
-        list.insertAtTail(20);
-        list.insertAtTail(30);
-        list.insertAtPosition(15, 1);
-        list.printForward(); // 10 <-> 15 <-> 20 <-> 30 <-> null
-        list.printBackward(); // 30 <-> 20 <-> 15 <-> 10 <-> null
-        list.deleteValue(20);
-        list.printForward(); // 10 <-> 15 <-> 30 <-> null
     }
 }

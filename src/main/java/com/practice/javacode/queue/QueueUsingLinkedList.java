@@ -1,22 +1,21 @@
 package com.practice.javacode.queue;
 
 public class QueueUsingLinkedList {
-    // Node class for linked list
-    private class Node {
-        int data;
-        Node next;
-
-        Node(int data) {
-            this.data = data;
-        }
-    }
-
     private Node front;
     private Node rear;
-
     public QueueUsingLinkedList() {
         front = null;
         rear = null;
+    }
+
+    public static void main(String[] args) {
+        QueueUsingLinkedList q = new QueueUsingLinkedList();
+        q.enqueue(10);
+        q.enqueue(20);
+        q.enqueue(30);
+        System.out.println(q.peek()); // 10
+        System.out.println(q.dequeue()); // 10
+        System.out.println(q.peek()); // 20
     }
 
     // Add element to queue
@@ -62,13 +61,13 @@ public class QueueUsingLinkedList {
         return front == null;
     }
 
-    public static void main(String[] args) {
-        QueueUsingLinkedList q = new QueueUsingLinkedList();
-        q.enqueue(10);
-        q.enqueue(20);
-        q.enqueue(30);
-        System.out.println(q.peek()); // 10
-        System.out.println(q.dequeue()); // 10
-        System.out.println(q.peek()); // 20
+    // Node class for linked list
+    private class Node {
+        int data;
+        Node next;
+
+        Node(int data) {
+            this.data = data;
+        }
     }
 }

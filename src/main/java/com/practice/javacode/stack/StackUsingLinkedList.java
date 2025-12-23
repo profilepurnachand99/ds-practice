@@ -1,17 +1,16 @@
 package com.practice.javacode.stack;
 
 public class StackUsingLinkedList {
-    // Node class for linked list
-    private class Node {
-        int data;
-        Node next;
-
-        Node(int data) {
-            this.data = data;
-        }
-    }
-
     private Node top;  // top of stack
+
+    public static void main(String[] args) {
+        StackUsingLinkedList stack = new StackUsingLinkedList();
+        stack.push(10);
+        stack.push(20);
+        stack.push(30);
+        System.out.println(stack.pop()); // 30
+        System.out.println(stack.peek()); // 20
+    }
 
     // Push element onto stack
     public void push(int x) {
@@ -45,12 +44,13 @@ public class StackUsingLinkedList {
         return top == null;
     }
 
-    public static void main(String[] args) {
-        StackUsingLinkedList stack = new StackUsingLinkedList();
-        stack.push(10);
-        stack.push(20);
-        stack.push(30);
-        System.out.println(stack.pop()); // 30
-        System.out.println(stack.peek()); // 20
+    // Node class for linked list
+    private class Node {
+        int data;
+        Node next;
+
+        Node(int data) {
+            this.data = data;
+        }
     }
 }

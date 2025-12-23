@@ -15,6 +15,18 @@ public class CircularQueue {
         size = 0;
     }
 
+    public static void main(String[] args) {
+        CircularQueue q = new CircularQueue(5);
+        q.enqueue(10);
+        q.enqueue(20);
+        q.enqueue(30);
+        q.enqueue(40);
+        q.enqueue(50);
+        System.out.println(q.dequeue()); // 10
+        q.enqueue(60); // wraps around
+        System.out.println(q.peek()); // 20
+    }
+
     // Insert element
     public void enqueue(int x) {
         if (isFull()) {
@@ -53,17 +65,5 @@ public class CircularQueue {
 
     public boolean isFull() {
         return size == capacity;
-    }
-
-    public static void main(String[] args) {
-        CircularQueue q = new CircularQueue(5);
-        q.enqueue(10);
-        q.enqueue(20);
-        q.enqueue(30);
-        q.enqueue(40);
-        q.enqueue(50);
-        System.out.println(q.dequeue()); // 10
-        q.enqueue(60); // wraps around
-        System.out.println(q.peek()); // 20
     }
 }

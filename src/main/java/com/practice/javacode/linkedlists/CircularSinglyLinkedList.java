@@ -7,6 +7,17 @@ public class CircularSinglyLinkedList {
         tail = null;
     }
 
+    public static void main(String[] args) {
+        CircularSinglyLinkedList list = new CircularSinglyLinkedList();
+        list.insertAtEnd(10);
+        list.insertAtEnd(20);
+        list.insertAtEnd(30);
+        list.insertAtHead(5);
+        list.printList(); // 5 -> 10 -> 20 -> 30 -> (back to head)
+        list.deleteValue(20);
+        list.printList(); // 5 -> 10 -> 30 -> (back to head)
+    }
+
     // Insert at beginning
     public void insertAtHead(int data) {
         Node newNode = new Node(data);
@@ -79,17 +90,6 @@ public class CircularSinglyLinkedList {
         } while (temp != tail.next);
 
         System.out.println("(back to head)");
-    }
-
-    public static void main(String[] args) {
-        CircularSinglyLinkedList list = new CircularSinglyLinkedList();
-        list.insertAtEnd(10);
-        list.insertAtEnd(20);
-        list.insertAtEnd(30);
-        list.insertAtHead(5);
-        list.printList(); // 5 -> 10 -> 20 -> 30 -> (back to head)
-        list.deleteValue(20);
-        list.printList(); // 5 -> 10 -> 30 -> (back to head)
     }
 }
 

@@ -12,6 +12,15 @@ public class StackUsingArray {
         top = -1;
     }
 
+    public static void main(String[] args) {
+        StackUsingArray stack = new StackUsingArray(5);
+        stack.push(10);
+        stack.push(20);
+        stack.push(30);
+        System.out.println(stack.pop()); // 30
+        System.out.println(stack.peek()); // 20
+    }
+
     // Add element to stack
     public void push(int x) {
         if (isFull()) {
@@ -47,15 +56,6 @@ public class StackUsingArray {
     // Check if stack is full
     public boolean isFull() {
         return top == capacity - 1;
-    }
-
-    public static void main(String[] args) {
-        StackUsingArray stack = new StackUsingArray(5);
-        stack.push(10);
-        stack.push(20);
-        stack.push(30);
-        System.out.println(stack.pop()); // 30
-        System.out.println(stack.peek()); // 20
     }
 }
 

@@ -23,6 +23,26 @@ public class SinglyLinkedList {
         head = newNode;
     }
 
+    // Print list
+    public void printList() {
+        Node temp = head;
+        while (temp != null) {
+            System.out.print(temp.data + " -> ");
+            temp = temp.next;
+        }
+        System.out.println("null");
+    }
+
+    // Search for a value
+    public boolean search(int value) {
+        Node temp = head;
+        while (temp != null) {
+            if (temp.data == value) return true;
+            temp = temp.next;
+        }
+        return false;
+    }
+
     // Insert at end
     public void insertAtEnd(int data) {
         Node newNode = new Node(data);
@@ -62,28 +82,6 @@ public class SinglyLinkedList {
         temp.next = newNode;
     }
 
-    // Delete first occurrence of a value
-    public void deleteValue(int value) {
-        if (head == null) return;
-
-        if (head.data == value) {
-            head = head.next;
-            return;
-        }
-
-        Node temp = head;
-        while (temp.next != null && temp.next.data != value) {
-            temp = temp.next;
-        }
-
-        if (temp.next == null) {
-            System.out.println("Value not found");
-            return;
-        }
-
-        temp.next = temp.next.next;
-    }
-
     // Delete at position (0-based)
     public void deleteAtPosition(int position) {
         if (head == null) return;
@@ -106,23 +104,26 @@ public class SinglyLinkedList {
         temp.next = temp.next.next;
     }
 
-    // Search for a value
-    public boolean search(int value) {
+    // Delete first occurrence of a value
+    public void deleteValue(int value) {
+        if (head == null) return;
+
+        if (head.data == value) {
+            head = head.next;
+            return;
+        }
+
         Node temp = head;
-        while (temp != null) {
-            if (temp.data == value) return true;
+        while (temp.next != null && temp.next.data != value) {
             temp = temp.next;
         }
-        return false;
+
+        if (temp.next == null) {
+            System.out.println("Value not found");
+            return;
+        }
+
+        temp.next = temp.next.next;
     }
 
-    // Print list
-    public void printList() {
-        Node temp = head;
-        while (temp != null) {
-            System.out.print(temp.data + " -> ");
-            temp = temp.next;
-        }
-        System.out.println("null");
-    }
 }

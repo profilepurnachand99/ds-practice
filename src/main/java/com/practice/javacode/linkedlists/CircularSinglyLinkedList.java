@@ -32,6 +32,22 @@ public class CircularSinglyLinkedList {
         tail.next = newNode;      // tail points to new head
     }
 
+    // Print list
+    public void printList() {
+        if (tail == null) {
+            System.out.println("List is empty");
+            return;
+        }
+
+        Node temp = tail.next; // head
+        do {
+            System.out.print(temp.data + " -> ");
+            temp = temp.next;
+        } while (temp != tail.next);
+
+        System.out.println("(back to head)");
+    }
+
     // Insert at end
     public void insertAtEnd(int data) {
         Node newNode = new Node(data);
@@ -76,20 +92,5 @@ public class CircularSinglyLinkedList {
         } while (current != tail.next);
     }
 
-    // Print list
-    public void printList() {
-        if (tail == null) {
-            System.out.println("List is empty");
-            return;
-        }
-
-        Node temp = tail.next; // head
-        do {
-            System.out.print(temp.data + " -> ");
-            temp = temp.next;
-        } while (temp != tail.next);
-
-        System.out.println("(back to head)");
-    }
 }
 

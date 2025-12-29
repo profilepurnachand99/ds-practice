@@ -73,6 +73,34 @@ class DoublyLinkedList {
         temp.next = newNode;
     }
 
+    // Delete at position (0-based)
+    public void deleteAtPosition(int position) {
+        if (head == null) return;
+
+        if (position == 0) {
+            head = head.next;
+            if (head != null) head.prev = null;
+            else tail = null;
+            return;
+        }
+
+        Node temp = head;
+        for (int i = 0; i < position && temp != null; i++) {
+            temp = temp.next;
+        }
+
+        if (temp == null) return;
+
+        if (temp == tail) {
+            tail = tail.prev;
+            tail.next = null;
+            return;
+        }
+
+        temp.prev.next = temp.next;
+        temp.next.prev = temp.prev;
+    }
+
     // Delete first occurrence of a value
     public void deleteValue(int value) {
         Node temp = head;
@@ -99,34 +127,6 @@ class DoublyLinkedList {
         }
 
         // Middle node
-        temp.prev.next = temp.next;
-        temp.next.prev = temp.prev;
-    }
-
-    // Delete at position (0-based)
-    public void deleteAtPosition(int position) {
-        if (head == null) return;
-
-        if (position == 0) {
-            head = head.next;
-            if (head != null) head.prev = null;
-            else tail = null;
-            return;
-        }
-
-        Node temp = head;
-        for (int i = 0; i < position && temp != null; i++) {
-            temp = temp.next;
-        }
-
-        if (temp == null) return;
-
-        if (temp == tail) {
-            tail = tail.prev;
-            tail.next = null;
-            return;
-        }
-
         temp.prev.next = temp.next;
         temp.next.prev = temp.prev;
     }

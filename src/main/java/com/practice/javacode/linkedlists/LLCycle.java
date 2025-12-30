@@ -1,5 +1,8 @@
 package com.practice.javacode.linkedlists;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * NeetCode Problem 7 (Linked List): Linked List Cycle
  * <p>
@@ -42,6 +45,19 @@ package com.practice.javacode.linkedlists;
  * Space Complexity: O(1) as we're only using two pointers
  */
 public class LLCycle {
+
+    public boolean hasCycleUsingSet(ListNode head) {
+        Set<ListNode> seen = new HashSet<>();
+        ListNode curr = head;
+        while (curr != null) {
+            if (seen.contains(curr)) {
+                return true; // cycle detected
+            }
+            seen.add(curr);
+            curr = curr.next;
+        }
+        return false; // reached null → no cycle
+    }
 
     /**
      * Determines if the linked list has a cycle using Floyd's Cycle-Finding Algorithm.

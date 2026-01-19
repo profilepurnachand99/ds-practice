@@ -86,14 +86,11 @@ public class BinaryTree {
             if (current.left == null) {
                 current.left = newNode;
                 return;
-            } else {
-                queue.add(current.left);
-            }
-
-            if (current.right == null) {
+            } else if (current.right == null) {
                 current.right = newNode;
                 return;
             } else {
+                queue.add(current.left);
                 queue.add(current.right);
             }
         }
@@ -138,6 +135,13 @@ public class BinaryTree {
             target.value = current.value; // replace with deepest node value
             deleteDeepest(parentOfDeepest, current);
         }
+        // (or) use below block
+        /*if (target != null) {
+            // Find deepest node
+            BTNode deepest = getDeepestNode();
+            target.value = deepest.value;
+            deleteDeepestNode();
+        }*/
     }
 
     // Helper to delete deepest node
@@ -158,22 +162,22 @@ public class BinaryTree {
         q.add(root);
 
         while (!q.isEmpty()) {
-            BTNode temp = q.poll();
+            BTNode current = q.remove();
 
-            if (temp.left != null) {
-                if (temp.left == deepest) {
-                    temp.left = null;
+            if (current.left != null) {
+                if (current.left == deepest) {
+                    current.left = null;
                     return;
                 }
-                q.add(temp.left);
+                q.add(current.left);
             }
 
-            if (temp.right != null) {
-                if (temp.right == deepest) {
-                    temp.right = null;
+            if (current.right != null) {
+                if (current.right == deepest) {
+                    current.right = null;
                     return;
                 }
-                q.add(temp.right);
+                q.add(current.right);
             }
         }
     }
@@ -226,4 +230,51 @@ public class BinaryTree {
         tree.delete(2);
         tree.levelOrder(); // 1 5 3 4
     }
+
+    // GET DEEPEST NODE
+    private BTNode getDeepestNode() {
+        Queue<BTNode> queue = new LinkedList<>();
+        queue.add(root);
+
+        BTNode current = null;
+
+        while (!queue.isEmpty()) {
+            current = queue.remove();
+            if (current.left != null) queue.add(current.left);
+            if (current.right != null) queue.add(current.right);
+        }
+        return current;
+    }
+
+    // DELETE DEEPEST NODE
+    private void deleteDeepestNode() {
+        if (root == null) return;
+
+        Queue<BTNode> queue = new LinkedList<>();
+        queue.add(root);
+
+        BTNode parent = null;
+        BTNode current = null;
+
+        while (!queue.isEmpty()) {
+            current = queue.remove();
+
+            if (current.left != null) {
+                parent = current;
+                queue.add(current.left);
+            }
+            if (current.right != null) {
+                parent = current;
+                queue.add(current.right);
+            }
+        }
+
+        // Remove deepest node
+        if (parent != null) {
+            if (parent.right == current) parent.right = null;
+            else parent.left = null;
+        } else {
+            root = null;
+        }
+    } //method end
 }

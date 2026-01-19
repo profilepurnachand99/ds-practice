@@ -87,44 +87,6 @@ public class BinaryTreeByLinkedList {
     }
 
 
-    //Delete deepest node
-    public void DeleteDeepestNode() {
-        Queue<BinaryNode> queue = new LinkedList<BinaryNode>();
-        queue.add(root);
-        BinaryNode previousNode, presentNode = null;
-        while (!queue.isEmpty()) {
-            previousNode = presentNode;
-            presentNode = queue.remove();
-            if (presentNode.getLeft() == null) {
-                previousNode.setRight(null);
-                return;
-            } else if ((presentNode.getRight() == null)) {
-                presentNode.setLeft(null);
-                return;
-            }
-            queue.add(presentNode.getLeft());
-            queue.add(presentNode.getRight());
-        }//end of while loop
-    }//end of method
-
-
-    // get last node of last level of binary tree
-    public BinaryNode getDeepestNode() {
-        // make an empty queue. Queue is Interface and LinkedList is class
-        Queue<BinaryNode> queue = new LinkedList<BinaryNode>();
-        queue.add(root);
-        BinaryNode presentNode = null;
-        while (!queue.isEmpty()) {
-            presentNode = queue.remove();
-            if (presentNode.getLeft() != null)
-                queue.add(presentNode.getLeft());
-            if (presentNode.getRight() != null)
-                queue.add(presentNode.getRight());
-        }
-        return presentNode;
-    }//end of method
-
-
     // pre-order traversal of binary tree
     void preOrder(BinaryNode node) {
         if (node == null)
@@ -178,5 +140,80 @@ public class BinaryTreeByLinkedList {
         root = null;
         System.out.println("Binary Tree has been deleted successfully");
     }
+
+    // get last node of last level of binary tree
+    public BinaryNode getDeepestNode() {
+        // make an empty queue. Queue is Interface and LinkedList is class
+        Queue<BinaryNode> queue = new LinkedList<BinaryNode>();
+        queue.add(root);
+        BinaryNode presentNode = null;
+        while (!queue.isEmpty()) {
+            presentNode = queue.remove();
+            if (presentNode.getLeft() != null)
+                queue.add(presentNode.getLeft());
+            if (presentNode.getRight() != null)
+                queue.add(presentNode.getRight());
+        }
+        return presentNode;
+    }//end of method
+
+
+    //Delete deepest node
+    public void DeleteDeepestNode() {
+        Queue<BinaryNode> queue = new LinkedList<BinaryNode>();
+        queue.add(root);
+        BinaryNode previousNode, presentNode = null;
+        while (!queue.isEmpty()) {
+            previousNode = presentNode;
+            presentNode = queue.remove();
+            if (presentNode.getLeft() == null) {
+                previousNode.setRight(null);
+                return;
+            } else if ((presentNode.getRight() == null)) {
+                presentNode.setLeft(null);
+                return;
+            }
+            queue.add(presentNode.getLeft());
+            queue.add(presentNode.getRight());
+        }//end of while loop
+    }//end of method
+
+    // Delete the deepest node in the tree
+    public void deleteDeepestNode_Fix() {
+        if (root == null)
+            return;
+
+        Queue<BinaryNode> queue = new LinkedList<>();
+        queue.add(root);
+
+        BinaryNode parent = null;
+        BinaryNode current = null;
+
+        while (!queue.isEmpty()) {
+            current = queue.remove();
+            // Track parent of each child
+            if (current.getLeft() != null) {
+                parent = current;
+                queue.add(current.getLeft());
+            }
+            if (current.getRight() != null) {
+                parent = current;
+                queue.add(current.getRight());
+            }
+        }
+
+        // 'current' is now the deepest node
+        // 'parent' is its parent
+        if (parent != null) {
+            if (parent.getRight() == current) {
+                parent.setRight(null);
+            } else {
+                parent.setLeft(null);
+            }
+        } else {
+            // Tree has only one node
+            root = null;
+        }
+    } // end of method
 
 }//end of class

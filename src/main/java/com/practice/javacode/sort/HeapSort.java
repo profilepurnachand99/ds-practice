@@ -15,12 +15,12 @@ public class HeapSort {
 
         // Extract elements from heap one by one
         for (int i = n - 1; i > 0; i--) {
-            // Move current root to end
+            // Move current root (max) to end
             int temp = arr[0];
             arr[0] = arr[i];
             arr[i] = temp;
 
-            // Heapify reduced heap
+            // Heapify the reduced heap
             heapify(arr, i, 0);
         }
     }
